@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Shell, Facebook, Instagram, Mail, Phone, MapPin, Plane, Award } from "lucide-react";
+import { Facebook, Instagram, Mail, Phone, MapPin, Plane, Award } from "lucide-react";
+import logoImage from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -9,18 +10,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-ocean flex items-center justify-center">
-                <Shell className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-bold text-lg leading-tight text-primary-foreground">
-                  Seashell
-                </span>
-                <span className="text-xs tracking-widest uppercase text-gold">
-                  Travel
-                </span>
-              </div>
+            <Link to="/" className="flex items-center">
+              <img 
+                src={logoImage} 
+                alt="SeaShell Travel" 
+                className="h-14 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               Your gateway to seamless leisure and corporate travel experiences. IATA accredited experts since 2011.
