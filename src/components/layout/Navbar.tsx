@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Search, Shell, Plane } from "lucide-react";
+import { Menu, X, ChevronDown, Search, Plane } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logoImage from "@/assets/logo.png";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -53,30 +54,15 @@ export function Navbar() {
       <div className="container mx-auto px-4 lg:px-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className={cn(
-              "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300",
-              isScrolled ? "bg-ocean" : "bg-primary-foreground/20 backdrop-blur-sm"
-            )}>
-              <Shell className={cn(
-                "w-6 h-6 transition-colors",
-                isScrolled ? "text-primary-foreground" : "text-primary-foreground"
-              )} />
-            </div>
-            <div className="flex flex-col">
-              <span className={cn(
-                "font-serif font-bold text-lg leading-tight transition-colors",
-                isScrolled ? "text-navy" : "text-primary-foreground"
-              )}>
-                Seashell
-              </span>
-              <span className={cn(
-                "text-xs tracking-widest uppercase transition-colors",
-                isScrolled ? "text-ocean" : "text-gold"
-              )}>
-                Travel
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logoImage} 
+              alt="SeaShell Travel" 
+              className={cn(
+                "h-12 w-auto transition-all duration-300",
+                isScrolled ? "brightness-100" : "brightness-0 invert"
+              )}
+            />
           </Link>
 
           {/* Desktop Navigation */}
