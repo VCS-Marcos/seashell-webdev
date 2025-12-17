@@ -3,6 +3,9 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export default function ContactPage() {
   const {
     toast
@@ -15,24 +18,81 @@ export default function ContactPage() {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    }
+    
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    
+    if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      toast({
+        title: "Validation Error",
+        description: "Please check the form for errors",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours."
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      serviceType: "general",
-      message: ""
-    });
-    setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours."
+        });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          serviceType: "general",
+          message: ""
+        });
+        setErrors({});
+      } else {
+        toast({
+          title: "Error",
+          description: data.message || "Failed to send message. Please try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return <Layout>
       {/* Hero Section */}
@@ -77,7 +137,8 @@ export default function ContactPage() {
                     <input id="name" type="text" required value={formData.name} onChange={e => setFormData({
                     ...formData,
                     name: e.target.value
-                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all" placeholder="John Doe" />
+                  })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.name ? 'border-red-500' : 'border-border'}`} placeholder="John Doe" data-testid="input-name" />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-navy mb-2">
@@ -86,7 +147,8 @@ export default function ContactPage() {
                     <input id="email" type="email" required value={formData.email} onChange={e => setFormData({
                     ...formData,
                     email: e.target.value
-                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all" placeholder="john@example.com" />
+                  })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.email ? 'border-red-500' : 'border-border'}`} placeholder="john@example.com" data-testid="input-email" />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -123,7 +185,8 @@ export default function ContactPage() {
                   <textarea id="message" required rows={5} value={formData.message} onChange={e => setFormData({
                   ...formData,
                   message: e.target.value
-                })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all resize-none" placeholder="Tell us about your travel plans..." />
+                })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-500' : 'border-border'}`} placeholder="Tell us about your travel plans..." data-testid="input-message" />
+                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                 </div>
 
                 <Button variant="ocean" size="lg" type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
