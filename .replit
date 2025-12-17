@@ -38,3 +38,14 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+MAIL_HOST = "smtp.office365.com"
+MAIL_PORT = "587"
+MAIL_USERNAME = "formmail@switch.sc"
