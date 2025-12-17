@@ -12,7 +12,7 @@ import { HelpCircle, MessageCircle } from "lucide-react";
 const faqs = [
   {
     question: "How do I book a ticket with Seashell Travel?",
-    answer: "You can book a ticket by contacting us via phone at +248 XXX XXXX, email at info@seashelltravel.com, or by filling out our online contact form. Our travel consultants will get back to you promptly with the best options for your journey.",
+    answer: "You can book a ticket by contacting us via phone at +248 4321 080 | +248 4321 762 | +248 4324 361, email at info@seashelltravel.com, or by filling out our online contact form. Our travel consultants will get back to you promptly with the best options for your journey.",
   },
   {
     question: "What payment methods do you accept?",

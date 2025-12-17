@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { Users, Award, Globe, Heart, MapPin, Plane } from "lucide-react";
 
 const teamMembers = [
-  { name: "Jean-Pierre Laporte", role: "Founder & CEO", bio: "Over 20 years in travel industry" },
-  { name: "Marie Dubois", role: "Operations Director", bio: "Expert in corporate travel solutions" },
-  { name: "Sarah Williams", role: "Senior Travel Consultant", bio: "Specialist in luxury destinations" },
-  { name: "James Michel", role: "Customer Relations Manager", bio: "Dedicated to exceptional service" },
+  { name: "Marc Houareau", role: "Director", bio: "Over 20 years in travel industry" },
+  { name: "Guy Savy", role: "Director", bio: "Dedicated to exceptional service" },
+  { name: "Marie-Josee Laporte", role: "Manager", bio: "Dedicated to exceptional service" },
+  { name: "Najeeb Fazil", role: "Financial Controller", bio: "Dedicated to exceptional service" },  { name: "Liselle Focktave", role: "Group Finance Manager", bio: "Dedicated to exceptional service" }
 ];
 
 const stats = [
