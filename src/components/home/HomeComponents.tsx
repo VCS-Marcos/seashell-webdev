@@ -58,9 +58,8 @@ export function HeroSection() {
           {/* Subheading */}
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto animate-fade-up" style={{
           animationDelay: "0.2s"
-        }}>
-            Your Gateway to Seamless Journeys. IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychelles.
-          </p>
+        }}>Connecting you to the world one ticket at a time. 
+IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychelles.</p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-up" style={{

@@ -12,7 +12,7 @@ export function Footer() {
               <img src={logoImage} alt="SeaShell Travel" className="h-14 w-auto brightness-0 invert" />
             </Link>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              Your gateway to seamless leisure and corporate travel experiences. IATA accredited experts since 2011.
+              Connecting you to the world one ticket at a time. IATA accredited experts since 2011.
             </p>
             <div className="flex items-center gap-2 text-gold text-sm">
               <Award className="w-4 h-4" />
@@ -67,7 +67,7 @@ export function Footer() {
                 <MapPin className="w-5 h-5 text-ocean-light shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70 text-sm">
                   Seashell Travel (Pty) Ltd<br />
-                  P.O. Box 349, Maison de Mahé<br />
+                  P.O. Box 349, VCS Building <br />
                   Victoria, Mahé, Seychelles
                 </span>
               </li>
@@ -90,11 +90,11 @@ export function Footer() {
             <div className="space-y-3 text-sm text-primary-foreground/70">
               <div className="flex justify-between">
                 <span>Monday - Friday</span>
-                <span className="text-primary-foreground">9:00 AM - 6:00 PM</span>
+                <span className="text-primary-foreground">8:00 AM - 4:30 PM</span>
               </div>
               <div className="flex justify-between">
                 <span>Saturday</span>
-                <span className="text-primary-foreground">9:00 AM - 1:00 PM</span>
+                <span className="text-primary-foreground">8:30 AM - 12:00 PM</span>
               </div>
               <div className="flex justify-between">
                 <span>Sunday</span>
