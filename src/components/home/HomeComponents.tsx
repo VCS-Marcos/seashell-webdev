@@ -121,7 +121,22 @@ export function AirlinePartners() {
   }, {
     name: "Mihin Lanka",
     description: "South Asian Escapes"
-  }];
+  }, {
+     name: "Etihad Airways",
+     description: "Inspired by Choice"
+   }
+   , {
+     name: "Ethiopian Airlines",
+     description: "The New Spirit of Africa"
+   }
+   , {
+     name: "Turkish Airlines",
+     description: "Widen Your World"
+   }
+   , {
+     name: "Qatar Airways",
+     description: "Going Places Together"
+   }];
   return <section ref={containerRef} className="py-20 bg-secondary">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12 reveal opacity-0 translate-y-8">

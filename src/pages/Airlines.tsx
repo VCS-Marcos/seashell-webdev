@@ -26,12 +26,49 @@ const airlines = [
     logo: "🇸🇨",
   },
   {
+    name: "Etihad Airways",
+    tagline: "Inspired by Choice",
+    description: "Abu Dhabi’s premium national airline, offering refined comfort, modern aircraft, and seamless global connections with personalized service.",
+    color: "from-emerald-600 to-emerald-800",
+    logo: "🇦🇪",
+  },
+
+  {
     name: "Mihin Lanka",
     tagline: "Affordable South Asian Escapes",
     description: "Budget-friendly connections to Sri Lanka and South Asian destinations, making exotic adventures accessible for all travelers.",
     color: "from-orange-600 to-orange-800",
     logo: "🇱🇰",
   },
+  {
+    name: "Ethiopian Airlines",
+    tagline: "The New Spirit of Africa",
+    description: "Africa’s leading carrier, connecting Seychelles to Africa and beyond with reliable service, modern fleets, and extensive routes.",
+    color: "from-yellow-600 to-red-700",
+    logo: "🇪🇹",
+  },
+  {
+    name: "Turkish Airlines",
+    tagline: "Widen Your World",
+    description: "Flying to more countries than any airline, offering smooth connections via Istanbul with renowned hospitality and global reach.",
+    color: "from-red-600 to-red-800",
+    logo: "🇹🇷",
+  },
+  {
+    name: "Qatar Airways",
+    tagline: "Going Places Together",
+    description: "A world-class airline delivering award-winning luxury, comfort, and seamless connections to over 160 destinations via Doha.",
+    color: "from-purple-700 to-purple-900",
+    logo: "🇶🇦",
+  },
+  {
+    name: "Aeroflot",
+    tagline: "The Russian Airlines",
+    description: "Russia’s flagship carrier offering dependable connections across Europe and Asia with modern aircraft and efficient routing.",
+    color: "from-sky-600 to-sky-800",
+    logo: "🇷🇺",
+  },
+
 ];
 
 export default function AirlinesPage() {
