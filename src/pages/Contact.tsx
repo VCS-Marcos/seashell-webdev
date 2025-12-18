@@ -160,7 +160,7 @@ export default function ContactPage() {
                     <input id="phone" type="tel" value={formData.phone} onChange={e => setFormData({
                     ...formData,
                     phone: e.target.value
-                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all" placeholder="+248 XXX XXXX" />
+                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all" placeholder="+248 432 1080" />
                   </div>
                   <div>
                     <label htmlFor="service" className="block text-sm font-medium text-navy mb-2">
@@ -229,7 +229,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-navy">Phone</h3>
-                    <a href="tel:+248XXXXXXX" className="text-ocean hover:text-ocean-light transition-colors">
+                    <a href="tel:+2484321080" className="text-ocean hover:text-ocean-light transition-colors">
                       +248 4321 080 | +248 4321 762 | +248 4324 361             
                     </a>
                   </div>
