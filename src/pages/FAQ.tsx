@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept major credit cards (Visa, MasterCard), bank transfers, and cash payments at our Victoria office. For corporate clients, we also offer invoicing options with approved credit terms.",
+    answer: "We accept major credit cards (Visa, MasterCard), bank transfers, Eboo, and cash payments at our Victoria office. For corporate clients, we also offer invoicing options with approved credit terms.",
   },
   {
     question: "Can you help with visa applications?",

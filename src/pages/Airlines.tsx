@@ -34,12 +34,13 @@ const airlines = [
   },
 
   {
-    name: "Mihin Lanka",
-    tagline: "Affordable South Asian Escapes",
-    description: "Budget-friendly connections to Sri Lanka and South Asian destinations, making exotic adventures accessible for all travelers.",
-    color: "from-orange-600 to-orange-800",
-    logo: "🇱🇰",
+    name: "IndiGo",
+    tagline: "On Time, Every Time",
+    description: "India’s largest airline, offering reliable, affordable travel with extensive domestic and international connectivity from major hubs.",
+    color: "from-blue-500 to-blue-700",
+    logo: "🇮🇳",
   },
+
   {
     name: "Ethiopian Airlines",
     tagline: "The New Spirit of Africa",
@@ -68,6 +69,14 @@ const airlines = [
     color: "from-sky-600 to-sky-800",
     logo: "🇷🇺",
   },
+  {
+    name: "South African Airways",
+    tagline: "Africa’s Pride, The World’s Airline",
+    description: "South Africa’s national carrier, connecting Africa to global destinations with dependable service and a strong regional network.",
+    color: "from-yellow-600 to-red-700",
+    logo: "🇿🇦",
+  },
+
 
 ];
 

@@ -119,8 +119,8 @@ export function AirlinePartners() {
     name: "Air Seychelles",
     description: "Home Skies Expertise"
   }, {
-    name: "Mihin Lanka",
-    description: "South Asian Escapes"
+    name: "IndiGo",
+    description: "On Time, Every Time"
   }, {
      name: "Etihad Airways",
      description: "Inspired by Choice"
