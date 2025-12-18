@@ -67,9 +67,9 @@ export default function PrivacyPage() {
               <h2 className="font-serif text-xl font-semibold text-navy mt-8 mb-4">9. Contact Us</h2>
               <p>
                 If you have questions about this Privacy Policy, please contact us at:<br />
-                Email: info@seashelltravel.com<br />
-                Phone: +248 XXX XXXX<br />
-                Address: P.O. Box 349, Maison de Mahé, Victoria, Mahé, Seychelles
+                Email: info@seashelltravel.sc<br />
+                Phone: +248 432 1080<br />
+                Address: P.O. Box 349, VCS Building, Victoria, Mahé, Seychelles
               </p>
             </div>
           </div>

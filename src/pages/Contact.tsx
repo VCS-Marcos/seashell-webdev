@@ -217,7 +217,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-navy">Address</h3>
                     <p className="text-muted-foreground mt-1">
                       Seashell Travel (Pty) Ltd<br />
-                      P.O. Box 349, Maison de Mahé<br />
+                      P.O. Box 349, VCS Building<br />
                       Victoria, Mahé, Seychelles
                     </p>
                   </div>
@@ -241,8 +241,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-navy">Email</h3>
-                    <a href="mailto:info@seashelltravel.com" className="text-ocean hover:text-ocean-light transition-colors">
-                      info@seashelltravel.com
+                    <a href="mailto:info@seashelltravel.sc" className="text-ocean hover:text-ocean-light transition-colors">
+                      info@seashelltravel.sc
                     </a>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export default function ContactPage() {
               <div className="mt-8 p-6 bg-ocean-deep rounded-2xl text-primary-foreground">
                 <h3 className="font-semibold mb-4">Follow Us for Travel Tips</h3>
                 <div className="flex gap-4">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
+                  <a href="https://facebook.com/sstsey" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
                     <span className="sr-only">Facebook</span>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

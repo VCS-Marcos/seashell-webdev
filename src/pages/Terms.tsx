@@ -54,8 +54,8 @@ export default function TermsPage() {
               <h2 className="font-serif text-xl font-semibold text-navy mt-8 mb-4">9. Contact</h2>
               <p>
                 For questions about these Terms of Use, please contact us at:<br />
-                Email: info@seashelltravel.com<br />
-                Phone: +248 XXX XXXX
+                Email: info@seashelltravel.sc<br />
+                Phone: +248 432 1080
               </p>
             </div>
           </div>
