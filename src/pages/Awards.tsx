@@ -47,6 +47,12 @@ const awards = [
     description: "Leading the region in premium and business class bookings.",
     airline: "Emirates",
   },
+  {
+    year: "2024-2025",
+    title: "Outstanding Sales Performance in Premium Class",
+    description: "Leading the region in premium and business class bookings.",
+    airline: "Air Seychelles",
+  },
 ];
 
 export default function AwardsPage() {
