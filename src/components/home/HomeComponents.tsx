@@ -45,7 +45,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{
       backgroundImage: `url(${heroImage})`
     }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_50%_0%,rgba(9,24,47,0.08)_0%,transparent_60%),linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.7)_20%,rgba(255,255,255,0.5)_50%,rgba(255,255,255,0.7)_100%)]" />
       </div>
 
       {/* Animated Wave Overlay */}
