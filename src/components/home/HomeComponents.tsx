@@ -71,17 +71,35 @@ export function HeroSection() {
           {/* Heading */}
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-up text-navy">
             Discover the World with{" "}
-            <span className="text-gold">Seashell Travel</span>
+            <span className="
+              bg-gradient-to-b from-gold via-gold/90 to-gold/70
+              bg-clip-text text-transparent
+              drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]
+            ">
+              Seashell Travel
+            </span>
+
           </h1>
 
 
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-ocean/10 backdrop-blur-sm border border-ocean/20 rounded-full px-4 py-2 text-sm animate-fade-up" style={{ animationDelay: "0.15s" }}>
+          <div
+            className="
+              inline-flex items-center gap-2
+              bg-white/70 backdrop-blur-md
+              border border-white/40
+              rounded-full px-4 py-2
+              text-sm animate-fade-up
+              shadow-sm
+            "
+            style={{ animationDelay: '0.15s' }}
+          >
             <Award className="w-4 h-4 text-gold" />
-            <span className="text-gold font-medium">IATA Accredited</span>
-            <span className="text-navy/80">Since 2011</span>
+            <span className="text-navy font-semibold">IATA Accredited</span>
+            <span className="text-navy/70">Since 2011</span>
           </div>
+
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-navy/80 max-w-2xl mx-auto animate-fade-up" style={{
