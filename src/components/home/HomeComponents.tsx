@@ -1,8 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plane, Briefcase, Award, Users, Globe, Headphones, MapPin, Calendar, Ticket, Car, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
+import logoImage from "@/assets/logo.png";
+
+// Airline logos
+import turkishAirlinesLogo from "@/assets/airlines/turkish-airlines.png";
+import southAfricanAirwaysLogo from "@/assets/airlines/south-african-airways.png";
+import airSeychellesLogo from "@/assets/airlines/air-seychelles.png";
+import emiratesLogo from "@/assets/airlines/emirates.png";
+import kenyaAirwaysLogo from "@/assets/airlines/kenya-airways.png";
+import qatarAirwaysLogo from "@/assets/airlines/qatar-airways.png";
+import aeroflotLogo from "@/assets/airlines/aeroflot.png";
+import airAustralLogo from "@/assets/airlines/air-austral.png";
+import airMauritiusLogo from "@/assets/airlines/air-mauritius.png";
+import ethiopianAirlinesLogo from "@/assets/airlines/ethiopian-airlines.png";
+import indiGoLogo from "@/assets/airlines/indigo.png";
 
 // Animation hook for scroll reveal
 function useScrollReveal() {
@@ -31,39 +45,52 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{
       backgroundImage: `url(${heroImage})`
     }}>
-        <div className="absolute inset-0 bg-hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/70" />
       </div>
 
       {/* Animated Wave Overlay */}
       <div className="absolute bottom-0 left-0 right-0">
-        
+
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center text-primary-foreground pt-20">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 text-sm animate-fade-in">
-            <Award className="w-4 h-4 text-gold" />
-            <span className="text-gold font-medium">IATA Accredited</span>
-            <span className="text-primary-foreground/80">Since 2011</span>
+      <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center pt-20">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Logo with Tagline */}
+          <div className="animate-fade-in">
+            <img 
+              src={logoImage} 
+              alt="Seashell Travel Logo" 
+              className="h-24 md:h-32 w-auto mx-auto drop-shadow-lg"
+            />
+            <p className="text-navy font-semibold tracking-[0.2em] text-xs md:text-sm mt-3">
+              CONNECTING YOU TO THE WORLD; ONE TICKET AT A TIME.
+            </p>
           </div>
 
           {/* Heading */}
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-bold leading-tight animate-fade-up">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-up text-navy">
             Discover the World with{" "}
             <span className="text-gold">Seashell Travel</span>
           </h1>
 
+
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-ocean/10 backdrop-blur-sm border border-ocean/20 rounded-full px-4 py-2 text-sm animate-fade-up" style={{ animationDelay: "0.15s" }}>
+            <Award className="w-4 h-4 text-gold" />
+            <span className="text-gold font-medium">IATA Accredited</span>
+            <span className="text-navy/80">Since 2011</span>
+          </div>
+
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto animate-fade-up" style={{
+          <p className="text-lg md:text-xl text-navy/80 max-w-2xl mx-auto animate-fade-up" style={{
           animationDelay: "0.2s"
-        }}>Connecting you to the world one ticket at a time. 
-IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychelles.</p>
+        }}>IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychelles.</p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-up" style={{
-          animationDelay: "0.4s"
+          animationDelay: "0.3s"
         }}>
             <Button variant="heroSolid" size="xl" asChild>
               <Link to="/services/leisure">
@@ -71,7 +98,7 @@ IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychell
                 Explore Leisure Travel
               </Link>
             </Button>
-            <Button variant="hero" size="xl" asChild>
+            <Button variant="ocean" size="xl" asChild>
               <Link to="/services/corporate">
                 <Briefcase className="w-5 h-5" />
                 Book Corporate Trips
@@ -80,8 +107,8 @@ IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychell
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-8 text-sm text-primary-foreground/70 animate-fade-up" style={{
-          animationDelay: "0.6s"
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-8 text-sm text-navy/70 animate-fade-up" style={{
+          animationDelay: "0.4s"
         }}>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-gold" />
@@ -89,11 +116,11 @@ IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychell
             </div>
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-gold" />
-              <span>5000+ Happy Travelers</span>
+              <span>50,000+ Happy Travelers</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="w-4 h-4 text-gold" />
-              <span>50+ Destinations</span>
+              <span>100+ Destinations</span>
             </div>
           </div>
         </div>
@@ -101,43 +128,72 @@ IATA Accredited Experts in Leisure & Corporate Travel from the Heart of Seychell
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-32 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-primary-foreground/30 flex items-start justify-center pt-2">
-          <div className="w-1.5 h-3 bg-primary-foreground/50 rounded-full animate-pulse" />
+        <div className="w-8 h-12 rounded-full border-2 border-ocean/30 flex items-start justify-center pt-2">
+          <div className="w-1.5 h-3 bg-ocean/50 rounded-full animate-pulse" />
         </div>
       </div>
     </section>;
 }
+// Airline partner logos with actual images
+const airlines = [
+  { name: "Kenya Airways", logo: kenyaAirwaysLogo },
+  { name: "Emirates", logo: emiratesLogo },
+  { name: "Air Seychelles", logo: airSeychellesLogo },
+  { name: "Qatar Airways", logo: qatarAirwaysLogo },
+  { name: "Turkish Airlines", logo: turkishAirlinesLogo },
+  { name: "South African Airways", logo: southAfricanAirwaysLogo },
+  // Placeholder for remaining airlines (you can add more logos later)
+  { name: "Ethiopian Airlines", logo: ethiopianAirlinesLogo },
+  { name: "Etihad Airways", logo: null },
+  { name: "Air Mauritius", logo: airMauritiusLogo },
+  { name: "Air Austral", logo: airAustralLogo },
+  { name: "IndiGo Airlines", logo: indiGoLogo },
+  { name: "Aeroflot", logo: aeroflotLogo },
+];
+
 export function AirlinePartners() {
   const containerRef = useScrollReveal();
-  const airlines = [{
-    name: "Kenya Airways",
-    description: "East African Gateway"
-  }, {
-    name: "Emirates",
-    description: "Luxury Global Routes"
-  }, {
-    name: "Air Seychelles",
-    description: "Home Skies Expertise"
-  }, {
-    name: "IndiGo",
-    description: "On Time, Every Time"
-  }, {
-     name: "Etihad Airways",
-     description: "Inspired by Choice"
-   }
-   , {
-     name: "Ethiopian Airlines",
-     description: "The New Spirit of Africa"
-   }
-   , {
-     name: "Turkish Airlines",
-     description: "Widen Your World"
-   }
-   , {
-     name: "Qatar Airways",
-     description: "Going Places Together"
-   }];
-  return <section ref={containerRef} className="py-20 bg-secondary">
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Handle mouse/touch drag for manual scrolling
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  return (
+    <section ref={containerRef} className="py-20 bg-secondary overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12 reveal opacity-0 translate-y-8">
           <span className="text-gold font-medium text-sm tracking-widest uppercase">Proud Partners</span>
@@ -148,22 +204,53 @@ export function AirlinePartners() {
             We work closely with the world's leading airlines to secure the best fares and exceptional service for your journeys.
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {airlines.map((airline, index) => <div key={airline.name} className="reveal opacity-0 translate-y-8 group" style={{
-          animationDelay: `${index * 0.1}s`
-        }}>
-              <div className="bg-card rounded-2xl p-6 shadow-elegant hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border">
-                <div className="aspect-[3/2] bg-muted rounded-lg flex items-center justify-center mb-4 group-hover:bg-ocean/5 transition-colors">
-                  <Plane className="w-12 h-12 text-ocean/40 group-hover:text-ocean transition-colors" />
-                </div>
-                <h3 className="font-semibold text-navy text-center">{airline.name}</h3>
-                <p className="text-sm text-muted-foreground text-center mt-1">{airline.description}</p>
+      {/* Auto-scrolling + draggable carousel */}
+      <div className="relative">
+        {/* Gradient fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling track - auto-scrolls and user can drag */}
+        <div 
+          ref={scrollRef}
+          className={`flex overflow-x-auto scrollbar-hide cursor-grab ${isDragging ? 'cursor-grabbing [animation-play-state:paused]' : 'animate-scroll-left hover:[animation-play-state:paused]'}`}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleMouseUp}
+          onTouchMove={handleTouchMove}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Duplicate airlines twice for seamless loop */}
+          {[...airlines, ...airlines].map((airline, index) => (
+            <div
+              key={`${airline.name}-${index}`}
+              className="flex-shrink-0 mx-4 group select-none"
+            >
+              <div className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-ocean/30 h-24 w-48 flex items-center justify-center">
+                {airline.logo ? (
+                  <img 
+                    src={airline.logo} 
+                    alt={airline.name}
+                    className="max-h-16 max-w-full object-contain"
+                    draggable={false}
+                  />
+                ) : (
+                  <span className="text-navy font-semibold text-sm text-center">
+                    {airline.name}
+                  </span>
+                )}
               </div>
-            </div>)}
+            </div>
+          ))}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }
 export function ServicesTeaser() {
   const containerRef = useScrollReveal();
@@ -276,13 +363,13 @@ export function TestimonialsSection() {
 export function TrustSignals() {
   const containerRef = useScrollReveal();
   const stats = [{
-    value: "10+",
+    value: "15+",
     label: "Years of Excellence"
   }, {
-    value: "5000+",
+    value: "50,000+",
     label: "Happy Travelers"
   }, {
-    value: "50+",
+    value: "100+",
     label: "Destinations"
   }, {
     value: "4x",

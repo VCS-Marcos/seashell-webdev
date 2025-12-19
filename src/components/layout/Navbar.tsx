@@ -57,13 +57,13 @@ export function Navbar() {
         <nav className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img src={logoImage} alt="SeaShell Travel" className={cn("h-12 w-auto transition-all duration-300", isScrolled ? "brightness-100" : "brightness-0 invert")} />
+            <img src={logoImage} alt="SeaShell Travel" className="h-12 w-auto transition-all duration-300" />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navItems.map(item => <div key={item.name} className="relative" onMouseEnter={() => item.children && setActiveDropdown(item.name)} onMouseLeave={() => setActiveDropdown(null)}>
-                <Link to={item.path} className={cn("px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-1 transition-all duration-300", isScrolled ? location.pathname === item.path || location.pathname.startsWith(item.path + "/") ? "text-ocean bg-ocean/10" : "text-navy hover:text-ocean hover:bg-ocean/5" : location.pathname === item.path || location.pathname.startsWith(item.path + "/") ? "text-gold bg-primary-foreground/10" : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10")}>
+                <Link to={item.path} className={cn("px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-1 transition-all duration-300", isScrolled ? location.pathname === item.path || location.pathname.startsWith(item.path + "/") ? "text-ocean bg-ocean/10" : "text-navy hover:text-ocean hover:bg-ocean/5" : location.pathname === item.path || location.pathname.startsWith(item.path + "/") ? "text-white bg-white/20" : "text-white/90 hover:text-white hover:bg-white/10")}>
                   {item.name}
                   {item.children && <ChevronDown className={cn("w-4 h-4 transition-transform duration-300", activeDropdown === item.name && "rotate-180")} />}
                 </Link>
@@ -81,7 +81,7 @@ export function Navbar() {
 
           {/* Search & CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            
+
             <Button variant={isScrolled ? "ocean" : "heroSolid"} size="sm" asChild>
               <Link to="/contact">
                 <Plane className="w-4 h-4" />
@@ -91,7 +91,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className={cn("lg:hidden p-2 rounded-lg transition-colors", isScrolled ? "text-navy hover:bg-muted" : "text-primary-foreground hover:bg-primary-foreground/10")} onClick={() => setIsOpen(!isOpen)}>
+          <button className={cn("lg:hidden p-2 rounded-lg transition-colors", isScrolled ? "text-navy hover:bg-muted" : "text-white hover:bg-white/10")} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </nav>
