@@ -39,6 +39,7 @@ function useScrollReveal() {
   }, []);
   return ref;
 }
+
 export function HeroSection() {
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax */}
@@ -152,6 +153,7 @@ export function HeroSection() {
       </div>
     </section>;
 }
+
 // Airline partner logos with actual images
 const airlines = [
   { name: "Kenya Airways", logo: kenyaAirwaysLogo },
@@ -172,9 +174,18 @@ const airlines = [
 export function AirlinePartners() {
   const containerRef = useScrollReveal();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [duplicatedAirlines, setDuplicatedAirlines] = useState<typeof airlines>([]);
+
+  // Create seamless loop by duplicating airlines 4 times
+  useEffect(() => {
+    // Duplicate 4 times for seamless scrolling
+    setDuplicatedAirlines([...airlines, ...airlines, ...airlines, ...airlines]);
+  }, []);
 
   // Handle mouse/touch drag for manual scrolling
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -224,16 +235,22 @@ export function AirlinePartners() {
         </div>
       </div>
 
-      {/* Auto-scrolling + draggable carousel */}
-      <div className="relative">
+      {/* Infinite seamless scrolling marquee */}
+      <div 
+        className="relative"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
         {/* Gradient fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling track - auto-scrolls and user can drag */}
+        {/* Seamless scrolling container */}
         <div 
           ref={scrollRef}
-          className={`flex overflow-x-auto scrollbar-hide cursor-grab ${isDragging ? 'cursor-grabbing [animation-play-state:paused]' : 'animate-scroll-left hover:[animation-play-state:paused]'}`}
+          className={`flex overflow-x-hidden cursor-grab ${isDragging ? 'cursor-grabbing' : ''} ${
+            isHovering ? '[animation-play-state:paused]' : ''
+          }`}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
@@ -241,35 +258,67 @@ export function AirlinePartners() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleMouseUp}
           onTouchMove={handleTouchMove}
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          style={{ 
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none',
+            animation: 'marquee-seamless 40s linear infinite',
+            width: 'fit-content'
+          }}
         >
-          {/* Duplicate airlines twice for seamless loop */}
-          {[...airlines, ...airlines].map((airline, index) => (
-            <div
-              key={`${airline.name}-${index}`}
-              className="flex-shrink-0 mx-4 group select-none"
-            >
-              <div className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-ocean/30 h-24 w-48 flex items-center justify-center">
-                {airline.logo ? (
-                  <img 
-                    src={airline.logo} 
-                    alt={airline.name}
-                    className="max-h-16 max-w-full object-contain"
-                    draggable={false}
-                  />
-                ) : (
-                  <span className="text-navy font-semibold text-sm text-center">
-                    {airline.name}
-                  </span>
-                )}
+          {/* Seamless marquee content - duplicated 4 times */}
+          <div 
+            ref={marqueeRef}
+            className="flex animate-marquee-seamless hover:[animation-play-state:paused]"
+          >
+            {duplicatedAirlines.map((airline, index) => (
+              <div
+                key={`${airline.name}-${index}`}
+                className="flex-shrink-0 mx-4 group select-none"
+              >
+                <div className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-ocean/30 h-24 w-48 flex items-center justify-center">
+                  {airline.logo ? (
+                    <img 
+                      src={airline.logo} 
+                      alt={airline.name}
+                      className="max-h-16 max-w-full object-contain"
+                      draggable={false}
+                    />
+                  ) : (
+                    <span className="text-navy font-semibold text-sm text-center">
+                      {airline.name}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Add inline CSS for seamless animation */}
+      <style>{`
+        @keyframes seamless-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-25%); }
+        }
+        .animate-marquee-seamless {
+          animation: seamless-scroll 40s linear infinite;
+        }
+        .animate-marquee-seamless:hover {
+          animation-play-state: paused;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   );
 }
+
 export function ServicesTeaser() {
   const containerRef = useScrollReveal();
   const services = [{
@@ -329,6 +378,7 @@ export function ServicesTeaser() {
       </div>
     </section>;
 }
+
 export function TestimonialsSection() {
   const containerRef = useScrollReveal();
   const testimonials = [{
@@ -378,6 +428,7 @@ export function TestimonialsSection() {
       </div>
     </section>;
 }
+
 export function TrustSignals() {
   const containerRef = useScrollReveal();
   const stats = [{
@@ -408,6 +459,7 @@ export function TrustSignals() {
       </div>
     </section>;
 }
+
 export function NewsletterSection() {
   const containerRef = useScrollReveal();
   return <section ref={containerRef} className="py-24 bg-secondary relative overflow-hidden">
