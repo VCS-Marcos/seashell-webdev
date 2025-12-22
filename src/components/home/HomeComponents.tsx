@@ -17,6 +17,7 @@ import airAustralLogo from "@/assets/airlines/air-austral.png";
 import airMauritiusLogo from "@/assets/airlines/air-mauritius.png";
 import ethiopianAirlinesLogo from "@/assets/airlines/ethiopian-airlines.png";
 import indiGoLogo from "@/assets/airlines/indigo.png";
+import etihadAirwaysLogo from "@/assets/airlines/etihad-airways.png";
 
 // Animation hook for scroll reveal
 function useScrollReveal() {
@@ -160,7 +161,7 @@ const airlines = [
   { name: "South African Airways", logo: southAfricanAirwaysLogo },
   // Placeholder for remaining airlines (you can add more logos later)
   { name: "Ethiopian Airlines", logo: ethiopianAirlinesLogo },
-  { name: "Etihad Airways", logo: null },
+  { name: "Etihad Airways", logo: etihadAirwaysLogo },
   { name: "Air Mauritius", logo: airMauritiusLogo },
   { name: "Air Austral", logo: airAustralLogo },
   { name: "IndiGo Airlines", logo: indiGoLogo },
