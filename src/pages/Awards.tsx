@@ -139,7 +139,7 @@ export default function AwardsPage() {
             {[
               { icon: Trophy, value: "7+", label: "Industry Awards" },
               { icon: Medal, value: "4", label: "Airline Partners" },
-              { icon: Star, value: "10+", label: "Years of Excellence" },
+              { icon: Star, value: "15+", label: "Years of Excellence" },
               { icon: Award, value: "IATA", label: "Accredited Agency" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">

@@ -11,8 +11,8 @@ const teamMembers = [
 ];
 
 const stats = [
-  { icon: Users, value: "5000+", label: "Happy Travelers" },
-  { icon: Globe, value: "50+", label: "Destinations" },
+  { icon: Users, value: "50,000+", label: "Happy Travelers" },
+  { icon: Globe, value: "100+", label: "Destinations" },
   { icon: Award, value: "4x", label: "Award-Winning" },
   { icon: Heart, value: "10+", label: "Years of Excellence" },
 ];
