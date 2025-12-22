@@ -76,6 +76,21 @@ const airlines = [
     color: "from-yellow-600 to-red-700",
     logo: "🇿🇦",
   },
+  {
+    name: "Air Mauritius",
+    tagline: "The Island Spirit",
+    description: "Mauritius’ national carrier, offering warm island hospitality with comfortable connections across Africa, Asia, and Europe.",
+    color: "from-red-600 to-orange-600",
+    logo: "🇲🇺",
+  },
+  {
+    name: "Air Austral",
+    tagline: "The Spirit of the Indian Ocean",
+    description: "A regional airline connecting the Indian Ocean islands to Africa, Asia, and Europe with reliable service and comfort.",
+    color: "from-sky-600 to-indigo-700",
+    logo: "🇷🇪",
+  },
+
 
 
 ];
@@ -132,7 +147,7 @@ export default function AirlinesPage() {
                   <div className="mt-6 pt-6 border-t border-border">
                     <Button variant="outline" className="group/btn" asChild>
                       <Link to="/contact">
-                        Book with {airline.name.split(" ")[0]}
+                        Book with {airline.name}
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </Button>
