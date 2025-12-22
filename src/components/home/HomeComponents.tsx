@@ -57,17 +57,6 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center pt-20">
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Logo with Tagline */}
-          <div className="animate-fade-in">
-            <img 
-              src={logoImage} 
-              alt="Seashell Travel Logo" 
-              className="h-24 md:h-32 w-auto mx-auto drop-shadow-lg"
-            />
-            <p className="text-navy font-semibold tracking-[0.2em] text-xs md:text-sm mt-3">
-              CONNECTING YOU TO THE WORLD; ONE TICKET AT A TIME.
-            </p>
-          </div>
 
           {/* Heading */}
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-up text-navy">
@@ -81,6 +70,19 @@ export function HeroSection() {
             </span>
 
           </h1>
+          {/* Logo with Tagline */}
+          <div className="animate-fade-in">
+            <img 
+              src={logoImage} 
+              alt="Seashell Travel Logo" 
+              className="h-24 md:h-32 w-auto mx-auto drop-shadow-lg"
+            />
+            <p className="text-navy font-semibold tracking-[0.2em] text-xs md:text-sm mt-3">
+              CONNECTING YOU TO THE WORLD; <br></br>ONE TICKET AT A TIME.
+            </p>
+          </div>
+
+
 
 
 
@@ -145,12 +147,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-ocean/30 flex items-start justify-center pt-2">
-          <div className="w-1.5 h-3 bg-ocean/50 rounded-full animate-pulse" />
-        </div>
-      </div>
     </section>;
 }
 
