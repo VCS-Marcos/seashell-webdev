@@ -91,6 +91,13 @@ const airlines = [
     logo: "🇷🇪",
   },
 
+  {
+    name: "Air France",
+    tagline: "France Is in the Air",
+    description: "France’s national airline, offering elegant travel with premium comfort and extensive global connectivity via Paris.",
+    color: "from-blue-700 to-sky-700",
+    logo: "🇫🇷",
+  },
 
 
 ];
