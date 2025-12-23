@@ -16,7 +16,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-2 text-gold text-sm">
               <Award className="w-4 h-4" />
-              <span>IATA: 73209827</span>
+              <span>IATA: 73209872</span>
             </div>
             <div className="flex items-center gap-3 pt-2">
               <a href="https://facebook.com/sstsey" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-ocean transition-colors">

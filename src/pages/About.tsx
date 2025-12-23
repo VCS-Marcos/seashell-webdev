@@ -47,7 +47,7 @@ export default function AboutPage() {
               </h2>
               <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Founded in 2011 as a fully accredited IATA agency (No. 73209827), Seashell Travel has grown to become one of Seychelles' premier travel agencies. From our base in Victoria, Mahé, we deliver personalized travel solutions that exceed expectations.
+                  Founded in 2011 as a fully accredited IATA agency (No. 73209872), Seashell Travel has grown to become one of Seychelles' premier travel agencies. From our base in Victoria, Mahé, we deliver personalized travel solutions that exceed expectations.
                 </p>
                 <p>
                   Our mission is simple: to provide exceptional service, secure the best rates, and create hassle-free adventures for individuals, families, and businesses alike. We believe that every journey should be as unique as the traveler embarking upon it.
