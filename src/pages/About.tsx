@@ -14,7 +14,7 @@ const stats = [
   { icon: Users, value: "50,000+", label: "Happy Travelers" },
   { icon: Globe, value: "100+", label: "Destinations" },
   { icon: Award, value: "4x", label: "Award-Winning" },
-  { icon: Heart, value: "10+", label: "Years of Excellence" },
+  { icon: Heart, value: "15+", label: "Years of Excellence" },
 ];
 
 export default function AboutPage() {
