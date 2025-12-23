@@ -67,7 +67,7 @@ export default function AboutPage() {
               </div>
               <div className="absolute -bottom-6 -left-6 bg-gold rounded-2xl p-6 shadow-gold">
                 <div className="text-navy">
-                  <div className="font-serif text-4xl font-bold">10+</div>
+                  <div className="font-serif text-4xl font-bold">15+</div>
                   <div className="text-sm font-medium">Years of Excellence</div>
                 </div>
               </div>

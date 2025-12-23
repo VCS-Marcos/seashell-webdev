@@ -126,7 +126,7 @@ export default function CorporateTravelPage() {
                 />
               </div>
               <div className="absolute -top-6 -left-6 bg-ocean-deep rounded-2xl p-6 text-primary-foreground shadow-lg">
-                <div className="font-serif text-3xl font-bold text-gold">10+</div>
+                <div className="font-serif text-3xl font-bold text-gold">15+</div>
                 <p className="text-sm">Years Serving Businesses</p>
               </div>
             </div>
