@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
@@ -7,41 +7,66 @@ import { useToast } from "@/hooks/use-toast";
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export default function ContactPage() {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
+  // Main form state - ADDED honeypot field
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     serviceType: "general",
-    message: ""
+    message: "",
+    website_url: "", // Honeypot field - hidden from users
+    _submit_time: "" // Submission timestamp for bot detection
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isFormReady, setIsFormReady] = useState(false); // Form delay for bots
+
+  // Add form readiness delay (2 seconds to prevent instant bot submissions)
+  useEffect(() => {
+    const timer = setTimeout(() => setIsFormReady(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (formData.name.trim().length < 2) {
       newErrors.name = "Name must be at least 2 characters";
     }
-    
+
     if (!emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (formData.message.trim().length < 10) {
       newErrors.message = "Message must be at least 10 characters";
     }
-    
+
+    // Phone validation if provided
+    if (formData.phone.trim() && !/^[\d\s\-\+\(\)]{10,20}$/.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Check if form is ready (bot prevention)
+    if (!isFormReady) {
+      toast({
+        title: "Please wait",
+        description: "Form is still loading...",
+        variant: "destructive"
+      });
+      return;
+    }
+
     if (!validateForm()) {
       toast({
         title: "Validation Error",
@@ -50,16 +75,23 @@ export default function ContactPage() {
       });
       return;
     }
-    
+
     setIsSubmitting(true);
 
     try {
+      // Prepare data with security fields
+      const submissionData = {
+        ...formData,
+        _submit_time: Math.floor(Date.now() / 1000), // Current timestamp in seconds
+        // Keep honeypot field as is (bots might fill it)
+      };
+
       const response = await fetch("/contact.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       const data = await response.json();
@@ -69,12 +101,15 @@ export default function ContactPage() {
           title: "Message Sent!",
           description: "Thank you for contacting us. We'll get back to you within 24 hours."
         });
+        // Reset form - keep honeypot field in state but empty
         setFormData({
           name: "",
           email: "",
           phone: "",
           serviceType: "general",
-          message: ""
+          message: "",
+          website_url: "", // Keep honeypot empty
+          _submit_time: "" // Reset timestamp
         });
         setErrors({});
       } else {
@@ -94,24 +129,28 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
-  return <Layout>
+
+  return (
+    <Layout>
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center bg-ocean-deep text-primary-foreground overflow-hidden">
         <div className="absolute inset-0">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31773.36073377661!2d55.438!3d-4.619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzcnMDguNCJTIDU1wrAyNicxNi44IkU!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s" className="w-full h-full opacity-30" style={{
-          border: 0
-        }} allowFullScreen loading="lazy" />
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31773.36073377661!2d55.438!3d-4.619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzcnMDguNCJTIDU1wrAyNicxNi44IkU!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s" 
+            className="w-full h-full opacity-30" 
+            style={{ border: 0 }}
+            allowFullScreen 
+            loading="lazy" 
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-ocean-deep/80 via-ocean-deep/70 to-ocean-deep" />
         </div>
-        
+
         <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center pt-20">
           <MapPin className="w-12 h-12 text-gold mx-auto mb-6" />
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold animate-fade-up">
             Get in Touch
           </h1>
-          <p className="text-lg text-primary-foreground/80 mt-6 max-w-2xl mx-auto animate-fade-up" style={{
-          animationDelay: "0.2s"
-        }}>
+          <p className="text-lg text-primary-foreground/80 mt-6 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: "0.2s" }}>
             We're here to help you plan your perfect journey. Reach out to our team today.
           </p>
         </div>
@@ -123,31 +162,76 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <div>
-              <span className="text-ocean font-medium text-sm tracking-widest uppercase">Send Us a Message</span>
+              <span className="text-ocean font-medium text-sm tracking-widest uppercase">
+                Send Us a Message
+              </span>
               <h2 className="font-serif text-3xl font-bold text-navy mt-2 mb-8">
                 We'd Love to Hear from You
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* HIDDEN HONEYPOT FIELD - BOTS WILL FILL THIS */}
+                <div 
+                  style={{ 
+                    display: 'none', 
+                    visibility: 'hidden', 
+                    height: 0, 
+                    overflow: 'hidden',
+                    opacity: 0,
+                    position: 'absolute',
+                    left: '-9999px'
+                  }}
+                  aria-hidden="true"
+                >
+                  <label htmlFor="website_url" className="sr-only">
+                    Leave this field empty if you're human
+                  </label>
+                  <input
+                    type="text"
+                    id="website_url"
+                    name="website_url"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website_url}
+                    onChange={(e) => setFormData({...formData, website_url: e.target.value})}
+                    placeholder="Leave this field empty"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-card"
+                  />
+                </div>
+
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-navy mb-2">
                       Full Name *
                     </label>
-                    <input id="name" type="text" required value={formData.name} onChange={e => setFormData({
-                    ...formData,
-                    name: e.target.value
-                  })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.name ? 'border-red-500' : 'border-border'}`} placeholder="John Doe" data-testid="input-name" />
+                    <input 
+                      id="name" 
+                      type="text" 
+                      required 
+                      value={formData.name} 
+                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.name ? 'border-red-500' : 'border-border'}`}
+                      placeholder="John Doe" 
+                      data-testid="input-name"
+                      disabled={!isFormReady}
+                    />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-navy mb-2">
                       Email Address *
                     </label>
-                    <input id="email" type="email" required value={formData.email} onChange={e => setFormData({
-                    ...formData,
-                    email: e.target.value
-                  })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.email ? 'border-red-500' : 'border-border'}`} placeholder="john@example.com" data-testid="input-email" />
+                    <input 
+                      id="email" 
+                      type="email" 
+                      required 
+                      value={formData.email} 
+                      onChange={e => setFormData({...formData, email: e.target.value})}
+                      className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.email ? 'border-red-500' : 'border-border'}`}
+                      placeholder="john@example.com" 
+                      data-testid="input-email"
+                      disabled={!isFormReady}
+                    />
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
@@ -157,19 +241,28 @@ export default function ContactPage() {
                     <label htmlFor="phone" className="block text-sm font-medium text-navy mb-2">
                       Phone Number
                     </label>
-                    <input id="phone" type="tel" value={formData.phone} onChange={e => setFormData({
-                    ...formData,
-                    phone: e.target.value
-                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all" placeholder="+248 432 1080" />
+                    <input 
+                      id="phone" 
+                      type="tel" 
+                      value={formData.phone} 
+                      onChange={e => setFormData({...formData, phone: e.target.value})}
+                      className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all ${errors.phone ? 'border-red-500' : 'border-border'}`}
+                      placeholder="+248 432 1080"
+                      disabled={!isFormReady}
+                    />
+                    {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
                   <div>
                     <label htmlFor="service" className="block text-sm font-medium text-navy mb-2">
                       Service Type
                     </label>
-                    <select id="service" value={formData.serviceType} onChange={e => setFormData({
-                    ...formData,
-                    serviceType: e.target.value
-                  })} className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all">
+                    <select 
+                      id="service" 
+                      value={formData.serviceType} 
+                      onChange={e => setFormData({...formData, serviceType: e.target.value})}
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all"
+                      disabled={!isFormReady}
+                    >
                       <option value="general">General Inquiry</option>
                       <option value="leisure">Leisure Travel</option>
                       <option value="corporate">Corporate Travel</option>
@@ -182,28 +275,55 @@ export default function ContactPage() {
                   <label htmlFor="message" className="block text-sm font-medium text-navy mb-2">
                     Message *
                   </label>
-                  <textarea id="message" required rows={5} value={formData.message} onChange={e => setFormData({
-                  ...formData,
-                  message: e.target.value
-                })} className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-500' : 'border-border'}`} placeholder="Tell us about your travel plans..." data-testid="input-message" />
+                  <textarea 
+                    id="message" 
+                    required 
+                    rows={5} 
+                    value={formData.message} 
+                    onChange={e => setFormData({...formData, message: e.target.value})}
+                    className={`w-full px-4 py-3 rounded-lg border bg-card focus:outline-none focus:ring-2 focus:ring-ocean focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-500' : 'border-border'}`}
+                    placeholder="Tell us about your travel plans..." 
+                    data-testid="input-message"
+                    disabled={!isFormReady}
+                  />
                   {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                 </div>
 
-                <Button variant="ocean" size="lg" type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
-                  {isSubmitting ? <>
+                {!isFormReady && (
+                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-yellow-800 text-sm">
+                      Form is loading security checks... Please wait a moment.
+                    </p>
+                  </div>
+                )}
+
+                <Button 
+                  variant="ocean" 
+                  size="lg" 
+                  type="submit" 
+                  disabled={isSubmitting || !isFormReady}
+                  className="w-full sm:w-auto"
+                >
+                  {isSubmitting ? (
+                    <>
                       <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                       Sending...
-                    </> : <>
+                    </>
+                  ) : (
+                    <>
                       <Send className="w-4 h-4" />
                       Send Message
-                    </>}
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
 
             {/* Contact Info */}
             <div>
-              <span className="text-ocean font-medium text-sm tracking-widest uppercase">Contact Information</span>
+              <span className="text-ocean font-medium text-sm tracking-widest uppercase">
+                Contact Information
+              </span>
               <h2 className="font-serif text-3xl font-bold text-navy mt-2 mb-8">
                 Visit Our Office
               </h2>
@@ -287,5 +407,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </Layout>;
+    </Layout>
+  );
 }
