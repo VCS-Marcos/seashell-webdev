@@ -133,7 +133,7 @@ export default function AwardsPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { icon: Trophy, value: "7+", label: "Industry Awards" },
-              { icon: Medal, value: "4", label: "Airline Partners" },
+              { icon: Medal, value: "10+", label: "Airline Partners" },
               { icon: Star, value: "15+", label: "Years of Excellence" },
               { icon: Award, value: "IATA", label: "Accredited Agency" },
             ].map((stat) => (
